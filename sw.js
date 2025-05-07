@@ -4,7 +4,7 @@ self.addEventListener("install", (event) => {
 
   // Espera até que todos os arquivos sejam armazenados no cache "static-cache-v1"
   event.waitUntil(
-    caches.open("static-cache-v1").then((cache) => {
+    caches.open("static-cache-v1.1").then((cache) => {
       // Lista de arquivos que serão armazenados para funcionar offline
       return cache.addAll([
          // redireciona para index.html

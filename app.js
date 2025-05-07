@@ -1,7 +1,31 @@
 // Verifica se o navegador suporta notificações e se ainda não foi concedida permissão
-if ("Notification" in window && Notification.permission !== "granted") {
-  Notification.requestPermission(); // Solicita permissão ao usuário
+// Solicita permissão para notificações com feedback e controle
+function solicitarPermissaoNotificacao() {
+  if ("Notification" in window) {
+    if (Notification.permission === "default") {
+      // Pede permissão apenas se ainda não foi dada nem negada
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          console.log("✅ Permissão para notificações concedida.");
+        } else {
+          console.warn("❌ Permissão para notificações negada.");
+        }
+      });
+    } else if (Notification.permission === "granted") {
+      console.log("🔔 Permissão já concedida.");
+    } else {
+      console.warn("⚠️ O usuário bloqueou as notificações.");
+    }
+  } else {
+    console.error("🚫 Este navegador não suporta notificações.");
+  }
 }
+
+// Chama a função assim que o DOM estiver pronto
+document.addEventListener("DOMContentLoaded", () => {
+  solicitarPermissaoNotificacao();
+});
+
 
 // Verifica se o navegador suporta Service Workers e registra o arquivo sw.js
 if ("serviceWorker" in navigator) {

@@ -4,7 +4,7 @@ self.addEventListener("install", (event) => {
 
   // Espera até que todos os arquivos sejam armazenados no cache "static-cache-v1.1"
   event.waitUntil(
-    caches.open("static-cache-v1.1").then((cache) => {
+    caches.open("static-cache-v2").then((cache) => {
       return cache.addAll([
         "index.html",
         "style.css",
